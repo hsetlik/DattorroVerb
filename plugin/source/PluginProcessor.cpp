@@ -1,9 +1,9 @@
-#include "YourPluginName/PluginProcessor.h"
+#include "DattorroVerb/PluginProcessor.h"
 
-#include "YourPluginName/Identifiers.h"
-#include "YourPluginName/PluginEditor.h"
+#include "DattorroVerb/Identifiers.h"
+#include "DattorroVerb/PluginEditor.h"
 namespace audio_plugin {
-YourPluginNameAudioProcessor::YourPluginNameAudioProcessor()
+DattorroVerbAudioProcessor::DattorroVerbAudioProcessor()
     : AudioProcessor(
           BusesProperties()
 #if !JucePlugin_IsMidiEffect
@@ -13,16 +13,16 @@ YourPluginNameAudioProcessor::YourPluginNameAudioProcessor()
               .withOutput("Output", juce::AudioChannelSet::stereo(), true)
 #endif
               ),
-      tree(*this, nullptr, ID::YourPluginName_state, ID::getParameterLayout()) {
+      tree(*this, nullptr, ID::DattorroVerb_state, ID::getParameterLayout()) {
 }
 
-YourPluginNameAudioProcessor::~YourPluginNameAudioProcessor() {}
+DattorroVerbAudioProcessor::~DattorroVerbAudioProcessor() {}
 
-const juce::String YourPluginNameAudioProcessor::getName() const {
+const juce::String DattorroVerbAudioProcessor::getName() const {
   return JucePlugin_Name;
 }
 
-bool YourPluginNameAudioProcessor::acceptsMidi() const {
+bool DattorroVerbAudioProcessor::acceptsMidi() const {
 #if JucePlugin_WantsMidiInput
   return true;
 #else
@@ -30,7 +30,7 @@ bool YourPluginNameAudioProcessor::acceptsMidi() const {
 #endif
 }
 
-bool YourPluginNameAudioProcessor::producesMidi() const {
+bool DattorroVerbAudioProcessor::producesMidi() const {
 #if JucePlugin_ProducesMidiOutput
   return true;
 #else
@@ -38,7 +38,7 @@ bool YourPluginNameAudioProcessor::producesMidi() const {
 #endif
 }
 
-bool YourPluginNameAudioProcessor::isMidiEffect() const {
+bool DattorroVerbAudioProcessor::isMidiEffect() const {
 #if JucePlugin_IsMidiEffect
   return true;
 #else
@@ -47,49 +47,49 @@ bool YourPluginNameAudioProcessor::isMidiEffect() const {
 #endif
 }
 
-double YourPluginNameAudioProcessor::getTailLengthSeconds() const {
+double DattorroVerbAudioProcessor::getTailLengthSeconds() const {
   return 0.0;
 }
 
-int YourPluginNameAudioProcessor::getNumPrograms() {
+int DattorroVerbAudioProcessor::getNumPrograms() {
   return 1;  // NB: some hosts don't cope very well if you tell them there are 0
   // programs, so this should be at least 1, even if you're not
   // really implementing programs.
 }
 
-int YourPluginNameAudioProcessor::getCurrentProgram() {
+int DattorroVerbAudioProcessor::getCurrentProgram() {
   return 0;
 }
 
-void YourPluginNameAudioProcessor::setCurrentProgram(int index) {
+void DattorroVerbAudioProcessor::setCurrentProgram(int index) {
   juce::ignoreUnused(index);
 }
 
-const juce::String YourPluginNameAudioProcessor::getProgramName(int index) {
+const juce::String DattorroVerbAudioProcessor::getProgramName(int index) {
   juce::ignoreUnused(index);
 
   return {};
 }
 
-void YourPluginNameAudioProcessor::changeProgramName(
+void DattorroVerbAudioProcessor::changeProgramName(
     int index,
     const juce::String& newName) {
   juce::ignoreUnused(index, newName);
 }
 
-void YourPluginNameAudioProcessor::prepareToPlay(double sampleRate,
+void DattorroVerbAudioProcessor::prepareToPlay(double sampleRate,
                                                  int samplesPerBlock) {
   // Use this method as the place to do any pre-playback
   // initialisation that you need..
   juce::ignoreUnused(sampleRate, samplesPerBlock);
 }
 
-void YourPluginNameAudioProcessor::releaseResources() {
+void DattorroVerbAudioProcessor::releaseResources() {
   // When playback stops, you can use this as an opportunity to free up any
   // spare memory, etc.
 }
 
-bool YourPluginNameAudioProcessor::isBusesLayoutSupported(
+bool DattorroVerbAudioProcessor::isBusesLayoutSupported(
     const BusesLayout& layouts) const {
 #if JucePlugin_IsMidiEffect
   juce::ignoreUnused(layouts);
@@ -111,7 +111,7 @@ bool YourPluginNameAudioProcessor::isBusesLayoutSupported(
 #endif
 }
 
-void YourPluginNameAudioProcessor::processBlock(
+void DattorroVerbAudioProcessor::processBlock(
     juce::AudioBuffer<float>& buffer,
     juce::MidiBuffer& midiMessages) {
   juce::ignoreUnused(midiMessages);
@@ -141,15 +141,15 @@ void YourPluginNameAudioProcessor::processBlock(
   }
 }
 
-bool YourPluginNameAudioProcessor::hasEditor() const {
+bool DattorroVerbAudioProcessor::hasEditor() const {
   return true;  // (change this to false if you choose to not supply an editor)
 }
 
-juce::AudioProcessorEditor* YourPluginNameAudioProcessor::createEditor() {
-  return new YourPluginNameProcessorEditor(*this);
+juce::AudioProcessorEditor* DattorroVerbAudioProcessor::createEditor() {
+  return new DattorroVerbProcessorEditor(*this);
 }
 
-void YourPluginNameAudioProcessor::getStateInformation(
+void DattorroVerbAudioProcessor::getStateInformation(
 
     juce::MemoryBlock& destData) {
   // You should use this method to store your parameters in the memory block.
@@ -158,7 +158,7 @@ void YourPluginNameAudioProcessor::getStateInformation(
   juce::ignoreUnused(destData);
 }
 
-void YourPluginNameAudioProcessor::setStateInformation(const void* data,
+void DattorroVerbAudioProcessor::setStateInformation(const void* data,
                                                        int sizeInBytes) {
   // You should use this method to restore your parameters from this memory
   // block, whose contents will have been created by the getStateInformation()
@@ -170,5 +170,5 @@ void YourPluginNameAudioProcessor::setStateInformation(const void* data,
 // This creates new instances of the plugin.
 // This function definition must be in the global namespace.
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter() {
-  return new audio_plugin::YourPluginNameAudioProcessor();
+  return new audio_plugin::DattorroVerbAudioProcessor();
 }
