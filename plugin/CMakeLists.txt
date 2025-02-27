@@ -23,10 +23,12 @@ target_sources(${PROJECT_NAME}
     PRIVATE
         source/Identifiers.cpp
         source/Common.cpp
+        source/DelayLine.cpp
         source/PluginEditor.cpp
         source/PluginProcessor.cpp
         ${INCLUDE_DIR}/Identifiers.h
         ${INCLUDE_DIR}/Common.h
+        ${INCLUDE_DIR}/DelayLine.h
         ${INCLUDE_DIR}/PluginEditor.h
         ${INCLUDE_DIR}/PluginProcessor.h
 )
