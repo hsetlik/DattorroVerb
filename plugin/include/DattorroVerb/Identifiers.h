@@ -19,11 +19,24 @@ typedef std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment>
     combo_attach_ptr;
 typedef juce::NormalisableRange<float> frange_t;
 
+// it's always annoyed me that juce doesn't just provide this constructor
+frange_t rangeWithCenter(float start, float end, float center);
+
 #define DECLARE_ID(name) const juce::Identifier name(#name);
 
 namespace ID {
 // top level ID for the apvts
 DECLARE_ID(DattorroVerb_state)
+
+// effect parameters
+DECLARE_ID(preDelayAmt)
+DECLARE_ID(preFilterAmt)
+DECLARE_ID(inputDiff1Amt)
+DECLARE_ID(inputDiff2Amt)
+DECLARE_ID(decayDiff1Amt)
+DECLARE_ID(dampingAmt)
+DECLARE_ID(decayAmt)
+DECLARE_ID(wetDry)
 
 apvts::ParameterLayout getParameterLayout();
 }  // namespace ID
