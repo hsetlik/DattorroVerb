@@ -1,7 +1,7 @@
 #pragma once
 
 #include <juce_audio_processors/juce_audio_processors.h>
-#include "Common.h"
+#include "Dattorro.h"
 
 namespace audio_plugin {
 
@@ -35,6 +35,7 @@ public:
   apvts tree;
 
 private:
+  Dattorro verb;
   JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(DattorroVerbAudioProcessor)
 };
 

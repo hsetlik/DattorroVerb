@@ -12,7 +12,7 @@ juce_add_plugin(${PROJECT_NAME}
     NEEDS_MIDI_INPUT FALSE # may change this
     NEEDS_MIDI_OUTPUT FALSE # may change this
     PLUGIN_MANUFACTURER_CODE STLK # change this
-    PLUGIN_CODE EXPL # change this
+    PLUGIN_CODE DTRV # change this
     FORMATS Standalone VST3  AU # may change this
     PRODUCT_NAME "DattorroVerb" # change this
     COPY_PLUGIN_AFTER_BUILD TRUE 
@@ -21,12 +21,14 @@ juce_add_plugin(${PROJECT_NAME}
 # Sets the source files of the plugin project.
 target_sources(${PROJECT_NAME}
     PRIVATE
+        source/Dattorro.cpp
         source/Identifiers.cpp
         source/Common.cpp
         source/DelayLine.cpp
         source/PluginEditor.cpp
         source/PluginProcessor.cpp
         ${INCLUDE_DIR}/Identifiers.h
+        ${INCLUDE_DIR}/Dattorro.h
         ${INCLUDE_DIR}/Common.h
         ${INCLUDE_DIR}/DelayLine.h
         ${INCLUDE_DIR}/PluginEditor.h
