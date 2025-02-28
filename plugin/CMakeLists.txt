@@ -21,12 +21,18 @@ juce_add_plugin(${PROJECT_NAME}
 # Sets the source files of the plugin project.
 target_sources(${PROJECT_NAME}
     PRIVATE
-        source/Dattorro.cpp
+
+        source/ParamSlider.cpp
+        source/RMSMeter.cpp
         source/Identifiers.cpp
+        source/Dattorro.cpp
         source/Common.cpp
         source/DelayLine.cpp
         source/PluginEditor.cpp
         source/PluginProcessor.cpp
+
+        ${INCLUDE_DIR}/ParamSlider.h
+        ${INCLUDE_DIR}/RMSMeter.h
         ${INCLUDE_DIR}/Identifiers.h
         ${INCLUDE_DIR}/Dattorro.h
         ${INCLUDE_DIR}/Common.h
