@@ -13,10 +13,7 @@
 
 // typedefs bc some of these types are a mouthful
 typedef juce::AudioProcessorValueTreeState apvts;
-typedef std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment>
-    slider_attach_ptr;
-typedef std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment>
-    combo_attach_ptr;
+
 typedef juce::NormalisableRange<float> frange_t;
 
 // it's always annoyed me that juce doesn't just provide this constructor

@@ -1,6 +1,6 @@
 #include "DattorroVerb/ParamSlider.h"
 #include "juce_events/juce_events.h"
-
+/*
 ParamSlider::ParamSlider(apvts* tree,
                          const juce::String& id,
                          const juce::String& labelText) {
@@ -11,6 +11,19 @@ ParamSlider::ParamSlider(apvts* tree,
   setSliderType(sType);
   // 2. set up the slider attachment
   sAttach.reset(new apvts::SliderAttachment(*tree, id, slider));
+}
+ */
+ParamSlider::ParamSlider() : sAttach(nullptr) {
+  addAndMakeVisible(&slider);
+  addAndMakeVisible(&label);
+  setSliderType(sType);
+}
+
+void ParamSlider::attach(apvts& tree,
+                         const juce::Identifier& id,
+                         juce::StringRef labelText) {
+  sAttach.reset(new apvts::SliderAttachment(tree, id.toString(), slider));
+  label.setText(labelText, juce::dontSendNotification);
 }
 
 void ParamSlider::setSliderType(ParamSliderType nType) {

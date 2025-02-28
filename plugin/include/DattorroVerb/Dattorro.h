@@ -6,6 +6,8 @@
 /* The big kahuna. Can handle either mono or stereo IO,
  * */
 
+#define WET_ONLY
+
 class Dattorro {
 private:
   // Delay lines & state------------------------------

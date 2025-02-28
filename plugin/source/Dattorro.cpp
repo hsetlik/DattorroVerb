@@ -168,9 +168,11 @@ float Dattorro::getRight() {
 // callbacks=============================================================
 
 void Dattorro::processMono(float* buf, int numSamples) {
+  float wet;
   for (int i = 0; i < numSamples; ++i) {
     processInput(buf[i]);
-    buf[i] = (getLeft() + getRight()) / 2.0f;
+    wet = (getLeft() + getRight()) / 2.0f;
+    buf[i] = wet;
   }
 }
 
@@ -181,16 +183,26 @@ void Dattorro::processStereo(float* lBuf,
   if (inputIsMono) {
     for (int i = 0; i < numSamples; ++i) {
       processInput(lBuf[i]);
+#ifdef WET_ONLY
       lBuf[i] = getLeft();
       rBuf[i] = getRight();
+#else
+      lBuf[i] = flerp(lBuf[i], getLeft(), wetDry);
+      rBuf[i] = flerp(rBuf[i], getRight(), wetDry);
+#endif
     }
   } else {
     float input;
     for (int i = 0; i < numSamples; ++i) {
       input = (lBuf[i] + rBuf[i]) / 2.0f;
       processInput(input);
+#ifdef WET_ONLY
       lBuf[i] = getLeft();
       rBuf[i] = getRight();
+#else
+      lBuf[i] = flerp(lBuf[i], getLeft(), wetDry);
+      rBuf[i] = flerp(rBuf[i], getRight(), wetDry);
+#endif
     }
   }
 }
