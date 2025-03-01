@@ -1,4 +1,4 @@
-#include "DattorroVerb/Identifiers.h"
+#include "DattorroReverbEX/Identifiers.h"
 
 frange_t rangeWithCenter(float start, float end, float center) {
   frange_t range(start, end);
@@ -24,7 +24,7 @@ apvts::ParameterLayout ID::getParameterLayout() {
   const frange_t dampingRange = rangeWithCenter(0.0f, 1.0f, 0.85f);
   const float dampingDefault = 0.95f;
   const frange_t wetDryRange = rangeWithCenter(0.0f, 1.0f, 0.5f);
-  const float wetDryDefault = 0.8f;
+  const float wetDryDefault = 0.85f;
 
   // add the params
   layout.add(std::make_unique<juce::AudioParameterFloat>(

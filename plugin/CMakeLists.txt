@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.22)
 # Version is needed by JUCE.
-project(DattorroVerb VERSION 0.1.0)
+project(DattorroReverbEX VERSION 0.1.0)
 # Adding a directory with the library/application name as a subfolder of the
 # include folder is a good practice. It helps avoid name clashes later on.
-set(INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include/DattorroVerb")
+set(INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include/DattorroReverbEX")
 # Adds a plugin target (that's basically what the Projucer does).
 
 juce_add_plugin(${PROJECT_NAME}
@@ -14,7 +14,7 @@ juce_add_plugin(${PROJECT_NAME}
     PLUGIN_MANUFACTURER_CODE STLK # change this
     PLUGIN_CODE DTRV # change this
     FORMATS Standalone VST3  AU # may change this
-    PRODUCT_NAME "DattorroVerb" # change this
+    PRODUCT_NAME "DattorroReverbEX" # change this
     COPY_PLUGIN_AFTER_BUILD TRUE 
 )
 

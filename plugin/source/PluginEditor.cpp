@@ -1,9 +1,9 @@
-#include "DattorroVerb/PluginEditor.h"
-#include "DattorroVerb/PluginProcessor.h"
+#include "DattorroReverbEX/PluginEditor.h"
+#include "DattorroReverbEX/PluginProcessor.h"
 
 namespace audio_plugin {
-DattorroVerbProcessorEditor::DattorroVerbProcessorEditor(
-    DattorroVerbAudioProcessor& p)
+DattorroReverbEXProcessorEditor::DattorroReverbEXProcessorEditor(
+    DattorroReverbEXAudioProcessor& p)
     : AudioProcessorEditor(&p), processorRef(p) {
   juce::ignoreUnused(processorRef);
   // Make sure that before the constructor has finished, you've set the
@@ -11,9 +11,9 @@ DattorroVerbProcessorEditor::DattorroVerbProcessorEditor(
   setSize(400, 300);
 }
 
-DattorroVerbProcessorEditor::~DattorroVerbProcessorEditor() {}
+DattorroReverbEXProcessorEditor::~DattorroReverbEXProcessorEditor() {}
 
-void DattorroVerbProcessorEditor::paint(juce::Graphics& g) {
+void DattorroReverbEXProcessorEditor::paint(juce::Graphics& g) {
   // (Our component is opaque, so we must completely fill the background with a
   // solid colour)
   g.fillAll(
@@ -24,7 +24,7 @@ void DattorroVerbProcessorEditor::paint(juce::Graphics& g) {
                    juce::Justification::centred, 1);
 }
 
-void DattorroVerbProcessorEditor::resized() {
+void DattorroReverbEXProcessorEditor::resized() {
   // This is generally where you'll want to lay out the positions of any
   // subcomponents in your editor..
 }

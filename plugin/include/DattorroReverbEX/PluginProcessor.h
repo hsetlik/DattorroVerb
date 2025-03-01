@@ -5,10 +5,10 @@
 
 namespace audio_plugin {
 
-class DattorroVerbAudioProcessor : public juce::AudioProcessor {
+class DattorroReverbEXAudioProcessor : public juce::AudioProcessor {
 public:
-  DattorroVerbAudioProcessor();
-  ~DattorroVerbAudioProcessor() override;
+  DattorroReverbEXAudioProcessor();
+  ~DattorroReverbEXAudioProcessor() override;
 
   void prepareToPlay(double sampleRate, int samplesPerBlock) override;
   void releaseResources() override;
@@ -36,7 +36,7 @@ public:
 
 private:
   Dattorro verb;
-  JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(DattorroVerbAudioProcessor)
+  JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(DattorroReverbEXAudioProcessor)
 };
 
 }  // namespace audio_plugin

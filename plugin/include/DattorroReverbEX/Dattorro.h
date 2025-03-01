@@ -1,24 +1,31 @@
 #pragma once
 
 #include "DelayLine.h"
+#include "juce_audio_basics/juce_audio_basics.h"
 #include "juce_core/system/juce_PlatformDefs.h"
 
 /* The big kahuna. Can handle either mono or stereo IO,
  * */
 
+#define CLEAN_AUDIO_BUFFER
+
 class Dattorro {
 private:
-  // Delay lines & state------------------------------
-  DelayLine preDelay;
-  DelayLine inDiffusion[4];
   float preFilter;
-  uint16_t maxPreDelay;
-  // the left and right 'tanks'
-  DelayLine decayDiffusion1[2];
-  DelayLine decayDiffusion2[2];
-  DelayLine preDampingDelay[2];
-  DelayLine postDampingDelay[2];
   float damping[2];
+  uint16_t maxPreDelay = 4410;
+  // Delay lines & state------------------------------
+  _DelayLine preDelay;
+  juce::OwnedArray<_DelayLine> inputDiffusion;
+  // the left and right 'tanks'
+  juce::OwnedArray<_DelayLine> decayDiffusion1;
+  juce::OwnedArray<_DelayLine> decayDiffusion2;
+  juce::OwnedArray<_DelayLine> preDampingDelay;
+  juce::OwnedArray<_DelayLine> postDampingDelay;
+  // DelayLine decayDiffusion1[2];
+  // DelayLine decayDiffusion2[2];
+  // DelayLine preDampingDelay[2];
+  // DelayLine postDampingDelay[2];
   // for tracking our sample offset
   uint16_t t = 0;
   // Parameters------------------------------
@@ -44,6 +51,10 @@ public:
                      float* rPtr,
                      int numSamples,
                      bool inputIsMono = false);
+  // maybe better let's see
+  void processBuffer(juce::AudioBuffer<float>& buf,
+                     int inChannels,
+                     int outChannels);
 
 private:
   // both the process methods above are made out of these helpers

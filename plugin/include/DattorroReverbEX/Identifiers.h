@@ -26,7 +26,7 @@ frange_t rangeWithCenter(float start, float end, float center);
 
 namespace ID {
 // top level ID for the apvts
-DECLARE_ID(DattorroVerb_state)
+DECLARE_ID(DattorroReverbEX_state)
 
 // effect parameters
 DECLARE_ID(preDelayAmt)
