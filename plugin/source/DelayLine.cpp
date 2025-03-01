@@ -14,7 +14,8 @@ static uint16_t neededBufSize(uint16_t delay) {
 void DelayLine::init(uint16_t delay) {
   maxDelay = delay;
   length = neededBufSize(delay);
-  data.reset(new float[length]);
+  data.reset(new float[(size_t)length]);
+  std::fill(data.get(), data.get() + (size_t)length, 0.0f);
 
   mask = length - 1;
   offsets[0] = mask + 1 - maxDelay;

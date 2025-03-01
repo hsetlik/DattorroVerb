@@ -12,7 +12,7 @@ juce_add_plugin(${PROJECT_NAME}
     NEEDS_MIDI_INPUT FALSE # may change this
     NEEDS_MIDI_OUTPUT FALSE # may change this
     PLUGIN_MANUFACTURER_CODE STLK # change this
-    PLUGIN_CODE DTRV # change this
+    PLUGIN_CODE DRRB # change this
     FORMATS Standalone VST3  AU # may change this
     PRODUCT_NAME "DattorroVerb" # change this
     COPY_PLUGIN_AFTER_BUILD TRUE 
