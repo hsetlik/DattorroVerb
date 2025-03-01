@@ -119,6 +119,7 @@ void DattorroVerbAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer,
   juce::ScopedNoDenormals noDenormals;
   auto totalNumOutputChannels = getTotalNumOutputChannels();
   const int length = buffer.getNumSamples();
+  verb.updateParams(tree);
   if (totalNumOutputChannels > 1) {  // stereo mode
     float* lPtr = buffer.getWritePointer(0);
     float* rPtr = buffer.getWritePointer(1);

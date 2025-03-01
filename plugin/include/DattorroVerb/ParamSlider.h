@@ -7,7 +7,7 @@ enum class ParamSliderType { Round, Vertical };
 
 class ParamSlider : public juce::Component {
 private:
-  ParamSliderType sType = ParamSliderType::Round;
+  ParamSliderType sType = ParamSliderType::Vertical;
   juce::Slider slider;
   juce::Label label;
   slider_attach_ptr sAttach;

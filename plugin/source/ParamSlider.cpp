@@ -14,8 +14,8 @@ ParamSlider::ParamSlider(apvts* tree,
 }
  */
 ParamSlider::ParamSlider() : sAttach(nullptr) {
-  addAndMakeVisible(&slider);
-  addAndMakeVisible(&label);
+  addAndMakeVisible(slider);
+  addAndMakeVisible(label);
   setSliderType(sType);
 }
 
@@ -31,11 +31,11 @@ void ParamSlider::setSliderType(ParamSliderType nType) {
   switch (sType) {
     case ParamSliderType::Round:
       slider.setSliderStyle(juce::Slider::Rotary);
-      slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 50);
+      slider.setTextBoxStyle(juce::Slider::NoTextBox, false, 50, 50);
       break;
     case ParamSliderType::Vertical:
       slider.setSliderStyle(juce::Slider::LinearVertical);
-      slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 50);
+      slider.setTextBoxStyle(juce::Slider::NoTextBox, false, 50, 50);
       break;
     default:
       break;
@@ -48,12 +48,10 @@ void ParamSlider::setLabelText(const juce::String& txt) {
 
 void ParamSlider::resized() {
   auto fBounds = getLocalBounds().toFloat();
-  constexpr float minLabelHeight = 16.0f;
+  constexpr float minLabelHeight = 20.0f;
   const float labelHeight =
-      std::max(minLabelHeight, fBounds.getHeight() * 0.125f);
-  auto lBounds = fBounds.removeFromTop(labelHeight);
-  label.setBoundsToFit(lBounds.toNearestInt(),
-                       juce::Justification::horizontallyCentred, true);
-  slider.setBoundsToFit(fBounds.toNearestInt(),
-                        juce::Justification::horizontallyCentred, true);
+      std::max(fBounds.getHeight() * 0.2f, minLabelHeight);
+  auto lBounds = fBounds.removeFromTop(labelHeight).toNearestInt();
+  label.setBounds(lBounds);
+  slider.setBounds(fBounds.toNearestInt());
 }

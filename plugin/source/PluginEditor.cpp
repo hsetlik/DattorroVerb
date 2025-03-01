@@ -28,6 +28,14 @@ DattorroVerbProcessorEditor::DattorroVerbProcessorEditor(
   addAndMakeVisible(&sWetDry);
   // Make sure that before the constructor has finished, you've set the
   // editor's size to whatever you need it to be.
+  sPreDelay.attach(p.tree, ID::preDelayAmt.toString(), "Pre-delay");
+  sPreFilter.attach(p.tree, ID::preFilterAmt.toString(), "Pre-filter");
+  sInDiff1.attach(p.tree, ID::inputDiff1Amt.toString(), "Input diff. 1");
+  sInDiff2.attach(p.tree, ID::inputDiff2Amt.toString(), "Input diff. 2");
+  sDecayDiff.attach(p.tree, ID::decayDiff1Amt.toString(), "Decay diff.");
+  sDamping.attach(p.tree, ID::dampingAmt.toString(), "Damping");
+  sDecay.attach(p.tree, ID::decayAmt.toString(), "Decay");
+  sWetDry.attach(p.tree, ID::wetDry.toString(), "Wet/dry");
   setSize(800, 600);
 }
 
@@ -57,9 +65,9 @@ void DattorroVerbProcessorEditor::resized() {
   sPreFilter.setBounds(t2.toNearestInt());
   sInDiff1.setBounds(t3.toNearestInt());
   sInDiff2.setBounds(t4.toNearestInt());
-  sDecayDiff.setBounds(t1.toNearestInt());
-  sDamping.setBounds(t2.toNearestInt());
-  sDecay.setBounds(t3.toNearestInt());
-  sWetDry.setBounds(t4.toNearestInt());
+  sDecayDiff.setBounds(b1.toNearestInt());
+  sDamping.setBounds(b2.toNearestInt());
+  sDecay.setBounds(b3.toNearestInt());
+  sWetDry.setBounds(b4.toNearestInt());
 }
 }  // namespace audio_plugin
