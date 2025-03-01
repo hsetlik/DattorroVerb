@@ -22,4 +22,7 @@ public:
   float process(uint16_t cycle, float input);
   void write(uint16_t cycle, float input);
   float read(uint8_t tap, uint16_t cycle);
+  // acts as an all-pass diffuser. good for cheaply
+  // adding a bit of phase randomization
+  float processDiffuser(uint16_t cycle, float input, float depth);
 };

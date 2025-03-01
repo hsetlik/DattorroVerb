@@ -37,3 +37,10 @@ void DelayLine::write(uint16_t cycle, float input) {
 float DelayLine::read(uint8_t tap, uint16_t cycle) {
   return data[(cycle + offsets[tap]) & mask];
 }
+
+float DelayLine::processDiffuser(uint16_t cycle, float input, float depth) {
+  float delay = read(0, cycle);
+  input += delay * -depth;
+  write(cycle, input);
+  return delay + input * depth;
+}

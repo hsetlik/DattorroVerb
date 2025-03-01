@@ -2,15 +2,21 @@
 #include "DattorroVerb/Identifiers.h"
 
 // filter helpers
+// this guy is like the simplest possible low pass filter
+// it just lerps the input with the previous output where
+// the freq argument is the proportion of the previous output
 static float LP_process(float* out, float in, float freq) {
   *out += (in - *out) * freq;
   return *out;
 }
-static float AP_process(DelayLine* dl, uint16_t cycle, float gain, float in) {
+
+// this works to somewhat mix up the phases by adding an inverted sample from a
+// modulated position in the delay line back to the output
+static float AP_process(DelayLine* dl, uint16_t cycle, float depth, float in) {
   float delayed = dl->read(0, cycle);
-  in += delayed * -gain;
+  in += delayed * -depth;
   dl->write(cycle, in);
-  return delayed + in * gain;
+  return delayed + in * depth;
 }
 //================================================================
 Dattorro::Dattorro() {}
@@ -104,9 +110,17 @@ void Dattorro::updateParams(apvts& tree) {
 //--------------------------------------------------
 // this function does the work for the common
 // pre-delay and input diffusion sections.
-// the 'tanks' are handled in the getLeft/getRight methods
+//
 void Dattorro::processInput(float input) {
   // modulate decayDiffusion1 for both tanks
+  //
+  // this is decimal 2047
+  // the bitwise and means that the if statement
+  // will run once per 2048 samples, a total of 32
+  // times per the 65536 samples in our 16 bit cycle
+  // In practice this this equates to a triangle wave LFO
+  // with a frequency of sampleRate/65536 hz
+  // For a standard 44.1 kHz sample rate that's about 0.67 hz
   if ((t & 0x07ff) == 0) {
     if (t < (1 << 15)) {
       decayDiffusion1[0].offsets[0]--;
@@ -119,23 +133,27 @@ void Dattorro::processInput(float input) {
   // pre-delay
   float x = preDelay.process(t, input);
   // pre-filter
-  x = LP_process(&preFilter, x, preFilterAmt);
+  static float _preFilter = 0.0f;
+  x = LP_process(&_preFilter, x, preFilterAmt);
+
   // input diffusion
-  x = AP_process(&inDiffusion[0], t, inputDiff1Amt, x);
-  x = AP_process(&inDiffusion[1], t, inputDiff1Amt, x);
-  x = AP_process(&inDiffusion[2], t, inputDiff2Amt, x);
-  x = AP_process(&inDiffusion[3], t, inputDiff2Amt, x);
+  x = inDiffusion[0].processDiffuser(t, x, inputDiff1Amt);
+  x = inDiffusion[1].processDiffuser(t, x, inputDiff1Amt);
+  x = inDiffusion[2].processDiffuser(t, x, inputDiff2Amt);
+  x = inDiffusion[3].processDiffuser(t, x, inputDiff2Amt);
+
   // process the tanks
+
   float x1;
   for (uint16_t i = 0; i < 2; i++) {
     // cross feedback
     x1 = x + postDampingDelay[1 - i].read(0, t) * decayAmt;
     // back to this half ot the tank
-    x1 = AP_process(&decayDiffusion1[i], t, decayDiff1Amt, x1);
+    x1 = decayDiffusion1[i].processDiffuser(t, x1, decayDiff1Amt);
     x1 = preDampingDelay[i].process(t, x1);
     x1 = LP_process(&damping[i], x1, dampingAmt);
     x1 *= decayAmt;
-    AP_process(&decayDiffusion2[i], t, decayDiff2Amt, x1);
+    x1 = decayDiffusion2[i].processDiffuser(t, x1, decayDiff2Amt);
     postDampingDelay[i].write(t, x1);
   }
   // increment t
